@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!114 &-7031180032628855666
+--- !u!114 &-1568373294480158570
 MonoBehaviour:
   m_ObjectHideFlags: 3
   m_CorrespondingSourceObject: {fileID: 0}
@@ -21,14 +21,30 @@ MonoBehaviour:
     m_Value: {x: 0.5, y: 0.5}
   intensity:
     m_OverrideState: 1
-    m_Value: 0.404
+    m_Value: 0.429
   smoothness:
     m_OverrideState: 1
     m_Value: 0.2
   rounded:
     m_OverrideState: 1
     m_Value: 0
---- !u!114 &-5804829230312013284
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d7fd9488000d3734a9e00ee676215985, type: 3}
+  m_Name: Global Volume Profile
+  m_EditorClassIdentifier: 
+  components:
+  - {fileID: 3788098155543967137}
+  - {fileID: -1568373294480158570}
+  - {fileID: 7323296201285825599}
+--- !u!114 &3788098155543967137
 MonoBehaviour:
   m_ObjectHideFlags: 3
   m_CorrespondingSourceObject: {fileID: 0}
@@ -43,30 +59,14 @@ MonoBehaviour:
   active: 1
   lift:
     m_OverrideState: 1
-    m_Value: {x: 0.9474849, y: 0.9848108, z: 1, w: 0}
+    m_Value: {x: 0.9291845, y: 0.9646743, z: 1, w: 0}
   gamma:
     m_OverrideState: 1
-    m_Value: {x: 0.9422342, y: 0.96091056, z: 1, w: 0}
+    m_Value: {x: 0.9184675, y: 1, z: 0.9388506, w: 0}
   gain:
     m_OverrideState: 1
-    m_Value: {x: 0.89771485, y: 1, z: 0.9317574, w: 0}
---- !u!114 &11400000
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d7fd9488000d3734a9e00ee676215985, type: 3}
-  m_Name: Global Volume Profile
-  m_EditorClassIdentifier: 
-  components:
-  - {fileID: -5804829230312013284}
-  - {fileID: -7031180032628855666}
-  - {fileID: 7172592024906507682}
---- !u!114 &7172592024906507682
+    m_Value: {x: 0.9411897, y: 0.9457917, z: 1, w: 0}
+--- !u!114 &7323296201285825599
 MonoBehaviour:
   m_ObjectHideFlags: 3
   m_CorrespondingSourceObject: {fileID: 0}
@@ -87,7 +87,7 @@ MonoBehaviour:
     m_Value: 0.9
   intensity:
     m_OverrideState: 1
-    m_Value: 10.46
+    m_Value: 1.41
   scatter:
     m_OverrideState: 1
     m_Value: 0.7
