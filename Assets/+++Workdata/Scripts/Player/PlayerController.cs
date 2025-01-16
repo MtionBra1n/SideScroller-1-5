@@ -37,7 +37,7 @@ public class PlayerController : MonoBehaviour
     private Rigidbody2D rb;
     private Animator anim;
     
-    private float movementSpeed;
+    public float movementSpeed;
     
     private bool isFacingRight = true;
     private bool jumpFix;
@@ -51,6 +51,7 @@ public class PlayerController : MonoBehaviour
 
     private int jumpCount;
     private int rollCount;
+    
     #region Input Variables
     
     public GameInput inputActions;
@@ -61,6 +62,7 @@ public class PlayerController : MonoBehaviour
     private InputAction attackAction;
     private InputAction rollAction;
     private InputAction interactAction;
+    private InputAction runAction;
     #endregion
     
     #endregion
@@ -78,6 +80,7 @@ public class PlayerController : MonoBehaviour
         moveAction = inputActions.Player.Move;
         jumpAction = inputActions.Player.Jump;
         rollAction = inputActions.Player.Roll;
+        runAction = inputActions.Player.Run;
         
         rb = GetComponent<Rigidbody2D>();
         anim = GetComponent<Animator>();
@@ -96,6 +99,8 @@ public class PlayerController : MonoBehaviour
 
         rollAction.performed += Roll;
 
+        runAction.performed += Run;
+        runAction.canceled += Run;
     }
 
     private void FixedUpdate()
@@ -130,7 +135,9 @@ public class PlayerController : MonoBehaviour
         jumpAction.performed -= Jump;
         
         rollAction.performed -= Roll;
-
+        
+        runAction.performed -= Run;
+        runAction.canceled -= Run;
     }
     #endregion
     
@@ -191,7 +198,12 @@ public class PlayerController : MonoBehaviour
             AnimAction(1);
         }
     }
-    
+
+    private void Run(InputAction.CallbackContext ctx)
+    {
+        movementSpeed = ctx.performed ? runSpeed : walkSpeed;
+    }
+
     #endregion
 
     #region Physics
