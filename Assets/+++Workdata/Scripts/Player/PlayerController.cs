@@ -33,6 +33,7 @@ public class PlayerController : MonoBehaviour
     
     #region Private Variables
 
+    public Interactable selectedInteractable;
     private Vector2 moveInput;
     private Rigidbody2D rb;
     private Animator anim;
@@ -81,6 +82,7 @@ public class PlayerController : MonoBehaviour
         jumpAction = inputActions.Player.Jump;
         rollAction = inputActions.Player.Roll;
         runAction = inputActions.Player.Run;
+        interactAction = inputActions.Player.Interact;
         
         rb = GetComponent<Rigidbody2D>();
         anim = GetComponent<Animator>();
@@ -90,7 +92,7 @@ public class PlayerController : MonoBehaviour
 
     private void OnEnable()
     {
-        inputActions.Enable();
+        EnableInput();
 
         moveAction.performed += Move;
         moveAction.canceled += Move;
@@ -101,6 +103,8 @@ public class PlayerController : MonoBehaviour
 
         runAction.performed += Run;
         runAction.canceled += Run;
+
+        interactAction.performed += Interact;
     }
 
     private void FixedUpdate()
@@ -127,7 +131,7 @@ public class PlayerController : MonoBehaviour
 
     private void OnDisable()
     {
-        inputActions.Disable();
+        DisableInput();
         
         moveAction.performed -= Move;
         moveAction.canceled -= Move;
@@ -138,11 +142,24 @@ public class PlayerController : MonoBehaviour
         
         runAction.performed -= Run;
         runAction.canceled -= Run;
+        
+        interactAction.performed -= Interact;
+
     }
     #endregion
     
     #region Input Methods
 
+    public void EnableInput()
+    {
+        inputActions.Enable();
+    }
+
+    public void DisableInput()
+    {
+        inputActions.Disable();
+    }
+    
     private void Move(InputAction.CallbackContext ctx)
     {
         moveInput = ctx.ReadValue<Vector2>();
@@ -208,6 +225,16 @@ public class PlayerController : MonoBehaviour
 
     #region Physics
 
+    private void OnTriggerEnter2D(Collider2D other)
+    {
+        TrySelectInteractable(other);
+    }
+
+    private void OnTriggerExit2D(Collider2D other)
+    {
+        TryDeselectInteractable(other);
+    }
+
     void CheckGround()
     {
         isGrounded = Physics2D.OverlapBox(boxxOffset + (Vector2)transform.position, boxSize, 0, groundLayer);
@@ -224,6 +251,46 @@ public class PlayerController : MonoBehaviour
         }
     }
     
+    #endregion
+
+    #region Interaction
+
+    private void Interact(InputAction.CallbackContext ctx)
+    {
+        if (selectedInteractable != null)
+        {
+            selectedInteractable.Interact();
+        }
+    }
+
+    private void TrySelectInteractable(Collider2D other)
+    {
+        Interactable interactable = other.GetComponent<Interactable>();
+
+        if (interactable == null) return;
+
+        if (selectedInteractable != null)
+        {
+            selectedInteractable.Deselect();
+        }
+
+        selectedInteractable = interactable;
+        selectedInteractable.Select();
+    }
+
+    private void TryDeselectInteractable(Collider2D other)
+    {
+        Interactable interactable = other.GetComponent<Interactable>();
+
+        if (interactable == null) return;
+
+        if (interactable == selectedInteractable)
+        {
+            selectedInteractable.Deselect();
+            selectedInteractable = null;
+        }
+    }
+
     #endregion
     
     #region Animations Methods
