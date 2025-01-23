@@ -33,7 +33,6 @@ public class PlayerController : MonoBehaviour
     
     #region Private Variables
 
-    public Interactable selectedInteractable;
     private Vector2 moveInput;
     private Rigidbody2D rb;
     private Animator anim;
@@ -81,8 +80,11 @@ public class PlayerController : MonoBehaviour
         moveAction = inputActions.Player.Move;
         jumpAction = inputActions.Player.Jump;
         rollAction = inputActions.Player.Roll;
+<<<<<<< Updated upstream
         runAction = inputActions.Player.Run;
-        interactAction = inputActions.Player.Interact;
+=======
+        rollAction = inputActions.Player.Run;
+>>>>>>> Stashed changes
         
         rb = GetComponent<Rigidbody2D>();
         anim = GetComponent<Animator>();
@@ -92,7 +94,7 @@ public class PlayerController : MonoBehaviour
 
     private void OnEnable()
     {
-        EnableInput();
+        inputActions.Enable();
 
         moveAction.performed += Move;
         moveAction.canceled += Move;
@@ -100,11 +102,12 @@ public class PlayerController : MonoBehaviour
         jumpAction.performed += Jump;
 
         rollAction.performed += Roll;
-
+        
         runAction.performed += Run;
         runAction.canceled += Run;
 
-        interactAction.performed += Interact;
+        runAction.performed += Run;
+        runAction.canceled += Run;
     }
 
     private void FixedUpdate()
@@ -113,16 +116,16 @@ public class PlayerController : MonoBehaviour
 
         if (!isRolling)
         {
-            rb.velocity = new Vector2(moveInput.x * movementSpeed, rb.velocity.y);
+            rb.linearVelocity = new Vector2(moveInput.x * movementSpeed, rb.linearVelocity.y);
 
-            if (rb.velocity.y > jumpPowerLimit)
+            if (rb.linearVelocity.y > jumpPowerLimit)
             {
-                rb.velocity = new Vector2(rb.velocity.x, jumpPowerLimit);
+                rb.linearVelocity = new Vector2(rb.linearVelocity.x, jumpPowerLimit);
             }
         }
-        else if (Mathf.Abs(rb.velocity.x) > rollPowerLimit)
+        else if (Mathf.Abs(rb.linearVelocity.x) > rollPowerLimit)
         {
-            rb.velocity = new Vector2(isFacingRight ? rollPowerLimit : -rollPowerLimit, rb.velocity.y);
+            rb.linearVelocity = new Vector2(isFacingRight ? rollPowerLimit : -rollPowerLimit, rb.linearVelocity.y);
         }
         
 
@@ -131,7 +134,7 @@ public class PlayerController : MonoBehaviour
 
     private void OnDisable()
     {
-        DisableInput();
+        inputActions.Disable();
         
         moveAction.performed -= Move;
         moveAction.canceled -= Move;
@@ -142,24 +145,15 @@ public class PlayerController : MonoBehaviour
         
         runAction.performed -= Run;
         runAction.canceled -= Run;
-        
-        interactAction.performed -= Interact;
+<<<<<<< Updated upstream
+=======
 
+>>>>>>> Stashed changes
     }
     #endregion
     
     #region Input Methods
 
-    public void EnableInput()
-    {
-        inputActions.Enable();
-    }
-
-    public void DisableInput()
-    {
-        inputActions.Disable();
-    }
-    
     private void Move(InputAction.CallbackContext ctx)
     {
         moveInput = ctx.ReadValue<Vector2>();
@@ -215,25 +209,23 @@ public class PlayerController : MonoBehaviour
             AnimAction(1);
         }
     }
+<<<<<<< Updated upstream
 
+=======
+    
+>>>>>>> Stashed changes
     private void Run(InputAction.CallbackContext ctx)
     {
         movementSpeed = ctx.performed ? runSpeed : walkSpeed;
     }
+<<<<<<< Updated upstream
 
+=======
+    
+>>>>>>> Stashed changes
     #endregion
 
     #region Physics
-
-    private void OnTriggerEnter2D(Collider2D other)
-    {
-        TrySelectInteractable(other);
-    }
-
-    private void OnTriggerExit2D(Collider2D other)
-    {
-        TryDeselectInteractable(other);
-    }
 
     void CheckGround()
     {
@@ -252,52 +244,12 @@ public class PlayerController : MonoBehaviour
     }
     
     #endregion
-
-    #region Interaction
-
-    private void Interact(InputAction.CallbackContext ctx)
-    {
-        if (selectedInteractable != null)
-        {
-            selectedInteractable.Interact();
-        }
-    }
-
-    private void TrySelectInteractable(Collider2D other)
-    {
-        Interactable interactable = other.GetComponent<Interactable>();
-
-        if (interactable == null) return;
-
-        if (selectedInteractable != null)
-        {
-            selectedInteractable.Deselect();
-        }
-
-        selectedInteractable = interactable;
-        selectedInteractable.Select();
-    }
-
-    private void TryDeselectInteractable(Collider2D other)
-    {
-        Interactable interactable = other.GetComponent<Interactable>();
-
-        if (interactable == null) return;
-
-        if (interactable == selectedInteractable)
-        {
-            selectedInteractable.Deselect();
-            selectedInteractable = null;
-        }
-    }
-
-    #endregion
     
     #region Animations Methods
 
     void UpdateAnimator()
     {
-        anim.SetFloat(Hash_MovementValue, Mathf.Abs(rb.velocity.x));
+        anim.SetFloat(Hash_MovementValue, Mathf.Abs(rb.linearVelocity.x));
         anim.SetBool(Hash_GroundValue, isGrounded);
     }
 

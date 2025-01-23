@@ -1,3 +1,4 @@
+
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -21,7 +22,7 @@ public class ButtonManager : MonoBehaviour
         mainMenuContainer.SetActive(true);
         optionsMenuContainer.SetActive(false);
     }
-
+    
     public void Button_NewGame()
     {
         StartCoroutine(FadeInLoadScene());
@@ -39,3 +40,4 @@ public class ButtonManager : MonoBehaviour
         asyncOperation.allowSceneActivation = true;
     }
 }
+

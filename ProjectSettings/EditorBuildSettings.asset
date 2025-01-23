@@ -4,12 +4,6 @@
 EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
-  m_Scenes:
-  - enabled: 1
-    path: Assets/+++Workdata/Scenes/Main Menu.unity
-    guid: 3b14bfffb095fec40a1efc0332f32700
-  - enabled: 1
-    path: Assets/+++Workdata/Scenes/Sidescroller Demo Level.unity
-    guid: 59b13a5909c7765438f7ce9afd9870c6
-  m_configObjects:
-    com.unity.input.settings.actions: {fileID: -944628639613478452, guid: 1a10a17212794934288c64a1d99c1b1c, type: 3}
+  m_Scenes: []
+  m_configObjects: {}
+  m_UseUCBPForAssetBundles: 0

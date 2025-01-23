@@ -45,7 +45,16 @@
                     "name": "Roll",
                     "type": "Button",
                     "id": "8353ea14-5608-4d82-b663-7f3b8e4c564e",
-                    "expectedControlType": "Button",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "Run",
+                    "type": "Button",
+                    "id": "b35f6215-2ae6-4dd9-b8e8-16ed338dca72",
+                    "expectedControlType": "",
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": false
@@ -248,17 +257,6 @@
                 },
                 {
                     "name": "",
-                    "id": "bc1d84f6-f60f-4512-aade-cad33ab11683",
-                    "path": "<Gamepad>/buttonSouth",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "Gamepad",
-                    "action": "Jump",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
                     "id": "9ab85d7d-ddbc-4c41-a85c-a5a1a3d17a70",
                     "path": "<Keyboard>/v",
                     "interactions": "",
@@ -270,12 +268,12 @@
                 },
                 {
                     "name": "",
-                    "id": "adae3e6f-63d4-4c2f-b450-0b403d5acbb8",
-                    "path": "<Gamepad>/buttonWest",
+                    "id": "a8f0026a-29b7-433a-b0f9-2bdaffc8f78c",
+                    "path": "<Keyboard>/shift",
                     "interactions": "",
                     "processors": "",
-                    "groups": "Gamepad",
-                    "action": "Roll",
+                    "groups": ";Gamepad",
+                    "action": "Run",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
