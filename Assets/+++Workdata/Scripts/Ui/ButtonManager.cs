@@ -9,6 +9,8 @@ public class ButtonManager : MonoBehaviour
     [SerializeField] private GameObject mainMenuContainer;
     [SerializeField] private GameObject optionsMenuContainer;
 
+    [SerializeField] private Animator anim;
+    
     public void Button_OpenOptionMenu()
     {
         mainMenuContainer.SetActive(false);
@@ -23,8 +25,19 @@ public class ButtonManager : MonoBehaviour
     
     public void Button_NewGame()
     {
-        SceneManager.LoadScene(1);
+        StartCoroutine(FadeInLoadScene());
     }
 
+    IEnumerator FadeInLoadScene()
+    {
+        AsyncOperation asyncOperation = SceneManager.LoadSceneAsync(1);
+        asyncOperation.allowSceneActivation = false;
+        anim.Play("FadePanel_fade in");
+        yield return new WaitForSeconds(1);
+
+        yield return new WaitUntil(() => asyncOperation.progress >= 0.9f);
+        
+        asyncOperation.allowSceneActivation = true;
+    }
 }
 
