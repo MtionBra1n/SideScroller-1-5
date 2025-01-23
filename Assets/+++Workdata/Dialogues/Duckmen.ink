@@ -4,7 +4,7 @@
 -> island
 
 = island
-Duckmen: Hey there fellow humanoid! What brings you to these lands?
+Duckmen: Hey there fellow humanoid§! What brings you to these lands?
 Robot: Just passing through, looking at the scenery.
 Duckmen: Then you might want to check out a pretty cool island over there. It has a lovely small forest on it.
 * [Sure! sounds good!] -> island_accept

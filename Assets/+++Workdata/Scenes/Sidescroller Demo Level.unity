@@ -7123,7 +7123,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7712518434704588690, guid: 818b63d266e082e459e86b07ff60763a, type: 3}
       propertyPath: m_Name
-      value: NAME container (1)
+      value: Sign container
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
